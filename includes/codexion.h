@@ -6,7 +6,7 @@
 /*   By: kchibukh <kchibukh@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:33:22 by kchibukh          #+#    #+#             */
-/*   Updated: 2026/08/30 15:02:15 by kchibukh         ###   ########.fr       */
+/*   Updated: 2026/08/30 18:49:38 by kchibukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_sim
 	t_coder			*coders;
 	t_dongle		*dongles;
 	pthread_t		monitor;
-	pthread_mutex_t	print_mutex;
+	pthread_mutex C4      C2_t	print_mutex;
 	pthread_mutex_t	state_mutex;
 	t_heap			*request_heap;
 }	t_sim;

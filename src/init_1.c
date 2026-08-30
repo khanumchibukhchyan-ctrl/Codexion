@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kchibukh <kchibukh@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:33:22 by kchibukh          #+#    #+#             */
-/*   Updated: 2026/08/30 17:06:52 by kchibukh         ###   ########.fr       */
+/*   Updated: 2026/08/30 18:27:13 by kchibukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+#include "init_2.c"
 #include <stdlib.h>
 
 static int	init_coders(t_sim *sim)
@@ -91,5 +92,6 @@ int	init_sim(t_sim *sim)
 		sim->coders = NULL;
 		return (1);
 	}
+	init_coder_dongles(sim);
 	return (0);
 }
