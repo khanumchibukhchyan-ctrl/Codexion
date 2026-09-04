@@ -6,17 +6,17 @@
 /*   By: kchibukh <kchibukh@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:33:22 by kchibukh          #+#    #+#             */
-/*   Updated: 2026/08/30 18:49:38 by kchibukh         ###   ########.fr       */
+/*   Updated: 2026/09/04 17:10:35 by kchibukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CODEXION_H
 # define CODEXION_H
 
-#include <pthread.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
+# include <pthread.h>
+# include <stdlib.h>
+# include <string.h>
+# include <stdio.h>
 
 typedef struct s_coder		t_coder;
 typedef struct s_dongle		t_dongle;
@@ -50,6 +50,7 @@ typedef struct s_sim
 	int				stop;
 	int				number_of_coders;
 	int				number_of_compiles_required;
+	long			simulation_start;
 	long			time_to_burnout;
 	long			time_to_compile;
 	long			time_to_debug;
@@ -59,7 +60,7 @@ typedef struct s_sim
 	t_coder			*coders;
 	t_dongle		*dongles;
 	pthread_t		monitor;
-	pthread_mutex C4      C2_t	print_mutex;
+	pthread_mutex_t	print_mutex;
 	pthread_mutex_t	state_mutex;
 	t_heap			*request_heap;
 }	t_sim;
@@ -76,11 +77,14 @@ typedef struct s_heap
 	t_request	*items;
 	int			size;
 	int			capacity;
+	t_sim		*sim;
 }	t_heap;
 
 int		parse(int argc, char **argv, t_sim *sim);
+int		init_heap(t_sim *sim);
 int		check(char *argv);
 int		check_args(char **argv);
 long	ft_atol(char *str);
+// void	destroy_heap(t_sim *sim);
 
 #endif

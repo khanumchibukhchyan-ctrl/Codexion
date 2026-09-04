@@ -6,13 +6,13 @@
 /*   By: kchibukh <kchibukh@student.42yerevan.am    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/17 14:33:22 by kchibukh          #+#    #+#             */
-/*   Updated: 2026/08/30 18:27:13 by kchibukh         ###   ########.fr       */
+/*   Updated: 2026/09/03 18:14:19 by kchibukh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
-#include "init_2.c"
 #include <stdlib.h>
+#include <sys/time.h>
 
 static int	init_coders(t_sim *sim)
 {
@@ -83,6 +83,11 @@ static int	init_dongles(t_sim *sim)
 
 int	init_sim(t_sim *sim)
 {
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) != 0)
+		return (1);
+	sim->simulation_start = tv.tv_sec * 1000L + tv.tv_usec / 1000L;
 	sim->stop = 0;
 	if (init_coders(sim))
 		return (1);
@@ -93,5 +98,12 @@ int	init_sim(t_sim *sim)
 		return (1);
 	}
 	init_coder_dongles(sim);
+	if (init_mutexes(sim))
+	{
+		destroy_dongles(sim, sim->number_of_coders);
+		free(sim->coders);
+		sim->coders = NULL;
+		return (1);
+	}
 	return (0);
 }
